@@ -25,10 +25,7 @@ class LoadBalancer:
         self.server_probs = probs
         self.s = sched.scheduler(Time, inc_time)
 
-
     def run(self):
-        packets_thrown = 0
-        # TODO: figure out how to work with poisson distribution
         for t_unit in range(self.total_time):
             servers = rnd.choices(self.servers, self.server_probs, k=1)
             for server in servers:
