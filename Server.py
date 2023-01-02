@@ -14,10 +14,8 @@ class Server:
         self.total_process_time = 0
         self.last_processed = 0
 
-    # def to enter
     def handle_packet(self, time_received, load_balancer):
         if self.queue.empty() and not self.is_working:
-            self.total_waiting_time += Time() - time_received
             rate = random.exponential(scale=self.proc_rate)
             self.total_process_time += rate
             self.is_working = True
@@ -40,4 +38,3 @@ class Server:
             load_balancer.s.enter(rate, 1, self.switch_packet, argument=(load_balancer,))
         else:
             self.is_working = False
-
